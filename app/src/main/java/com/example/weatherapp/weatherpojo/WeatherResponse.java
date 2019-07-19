@@ -1,4 +1,4 @@
-package weatherpojo;
+package com.example.weatherapp.weatherpojo;
 
 import java.util.List;
 

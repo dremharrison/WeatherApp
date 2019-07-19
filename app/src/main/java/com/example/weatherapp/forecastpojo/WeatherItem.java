@@ -1,9 +1,9 @@
-package weatherpojo;
+package com.example.weatherapp.forecastpojo;
 
-
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("com.robohorse.robopojogenerator")
 public class WeatherItem{
 
 	@SerializedName("icon")
