@@ -1,10 +1,9 @@
 package com.example.weatherapp.forecastpojo;
 
 import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("com.robohorse.robopojogenerator")
+
 public class ListItem{
 
 	@SerializedName("dt")
