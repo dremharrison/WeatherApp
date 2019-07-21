@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -51,13 +52,13 @@
         android:text="@string/weather_description"
         android:textSize="14sp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/tv_tempature"
+        app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_weather_main" />
 
     <TextView
-        android:id="@+id/tv_tempature"
+        android:id="@+id/tv_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -76,17 +77,32 @@
         android:layout_marginBottom="24dp"
         android:text="Wind: 10 mph"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline0"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerviewGuideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tempature" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/recyclerviewGuideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".60"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline0"
+        app:layout_constraintTop_toBottomOf="@id/recyclerviewGuideline">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".70" />
+        app:layout_constraintGuide_percent=".80" />
 
     <View
         android:id="@+id/v_0"
@@ -119,27 +135,17 @@
         app:layout_constraintTop_toBottomOf="@id/tv_dayone_date" />
 
     <TextView
-        android:id="@+id/tv_dayone_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/tv_dayone_temp"
-        app:layout_constraintEnd_toEndOf="@id/guideline1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_dayone_icon" />
-
-    <TextView
         android:id="@+id/tv_dayone_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="88º"
+        android:text="º"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dayone_main" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_dayone_icon" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -180,27 +186,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_daytwo_date" />
 
     <TextView
-        android:id="@+id/tv_daytwo_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/tv_daytwo_temp"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/iv_daytwo_icon" />
-
-    <TextView
         android:id="@+id/tv_daytwo_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="88º"
+        android:text="º"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/tv_daytwo_main" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_daytwo_icon" />
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -240,27 +237,16 @@
         app:layout_constraintTop_toBottomOf="@id/tv_daythree_date" />
 
     <TextView
-        android:id="@+id/tv_daythree_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/tv_daythree_temp"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/iv_daythree_icon" />
-
-    <TextView
         android:id="@+id/tv_daythree_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="88º"
+        android:text="º"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_daythree_main" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_daythree_icon" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -300,27 +286,16 @@
         app:layout_constraintTop_toBottomOf="@id/tv_dayfour_date" />
 
     <TextView
-        android:id="@+id/tv_dayfour_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/tv_dayfour_temp"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/iv_dayfour_icon" />
-
-    <TextView
         android:id="@+id/tv_dayfour_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="88º"
+        android:text="º"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dayfour_main" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_dayfour_icon" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -360,26 +335,15 @@
         app:layout_constraintTop_toBottomOf="@id/tv_dayfive_date" />
 
     <TextView
-        android:id="@+id/tv_dayfive_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/tv_dayfive_temp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/iv_dayfive_icon" />
-
-    <TextView
         android:id="@+id/tv_dayfive_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="88º"
+        android:text="º"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dayfive_main" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_dayfive_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

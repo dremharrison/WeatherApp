@@ -1,5 +1,6 @@
 package com.example.weatherapp.weatherpojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -117,7 +118,7 @@ public class WeatherResponse{
 		this.weather = weather;
 	}
 
-	public List<WeatherItem> getWeather(){
+	public List<WeatherItem> getWeather() {
 		return weather;
 	}
 
