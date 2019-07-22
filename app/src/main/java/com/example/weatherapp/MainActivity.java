@@ -1,6 +1,9 @@
 package com.example.weatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.weatherapp.accuweatherpojo.AccuweatherResponse;
 import com.example.weatherapp.forecastpojo.ForecastResponse;
+import com.example.weatherapp.forecastpojo.ListItem;
 import com.example.weatherapp.retrofit.AccuweatherService;
 import com.example.weatherapp.retrofit.ForecastService;
 import com.example.weatherapp.retrofit.RetrofitClientInstance;
@@ -27,6 +31,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivitys";
+    private RecyclerView recyclerView;
     private final String OPEN_WEATHER_APP_ID = "84869316442320747ea4c9e3a0608c2d";
     private final String ACCUWEATHER_APP_ID = "WUBtmi1nL8EqkSgVhsrr5Z0dGVLSQbEW";
     private final String zipcode = "30309,us";
@@ -64,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        recyclerView = findViewById(R.id.rv_hourly);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setHasFixedSize(true);
 
         retrofitWeatherRequest(OPEN_WEATHER_APP_ID, zipcode, units);
         retrofitForecastRequest(OPEN_WEATHER_APP_ID, zipcode, units);
@@ -147,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(retrofit2.Call<ForecastResponse> call, Response<ForecastResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse: Success " + response.body());
+                    loadRecyclerView(response.body().getList());
 
 
                 } else {
@@ -176,40 +188,40 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse: Success " + response.body());
 
-//                    tvDayOneDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(0).getEpochDate()  * 1000L)).substring(0,3));
-//                    tvDayTwoDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(1).getEpochDate()  * 1000L)).substring(0,3));
-//                    tvDayThreeDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(2).getEpochDate()  * 1000L)).substring(0,3));
-//                    tvDayFourDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(3).getEpochDate()  * 1000L)).substring(0,3));
-//                    tvDayFiveDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(4).getEpochDate()  * 1000L)).substring(0,3));
-//
-//                    String dayOneIconNum = String.valueOf(response.body().getDailyForecasts().get(0).getDay().getIcon());
-//                    setDayOneIcon(dayOneIconNum);
-//
-//                    String dayTwoIconNum = String.valueOf(response.body().getDailyForecasts().get(1).getDay().getIcon());
-//                    setDayTwoIcon(dayTwoIconNum);
-//
-//                    String dayThreeIconNum = String.valueOf(response.body().getDailyForecasts().get(2).getDay().getIcon());
-//                    setDayThreeIcon(dayThreeIconNum);
-//
-//                    String dayFourIconNum = String.valueOf(response.body().getDailyForecasts().get(3).getDay().getIcon());
-//                    setDayFourIcon(dayFourIconNum);
-//
-//                    String dayFiveIconNum = String.valueOf(response.body().getDailyForecasts().get(4).getDay().getIcon());
-//                    setDayFiveIcon(dayFiveIconNum);
-//
-//
-//
-//                    int tempDayOne = (int) Math.rint(response.body().getDailyForecasts().get(0).getTemperature().getMaximum().getValue());
-//                    int tempDayTwo = (int) Math.rint(response.body().getDailyForecasts().get(1).getTemperature().getMaximum().getValue());
-//                    int tempDayThree = (int) Math.rint(response.body().getDailyForecasts().get(2).getTemperature().getMaximum().getValue());
-//                    int tempDayFour = (int) Math.rint(response.body().getDailyForecasts().get(3).getTemperature().getMaximum().getValue());
-//                    int tempDayFive = (int) Math.rint(response.body().getDailyForecasts().get(4).getTemperature().getMaximum().getValue());
-//
-//                    tvDayOneTemp.setText(String.valueOf(tempDayOne));
-//                    tvDayTwoTemp.setText(String.valueOf(tempDayTwo));
-//                    tvDayThreeTemp.setText(String.valueOf(tempDayThree));
-//                    tvDayFourTemp.setText(String.valueOf(tempDayFour));
-//                    tvDayFiveTemp.setText(String.valueOf(tempDayFive));
+                    tvDayOneDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(0).getEpochDate()  * 1000L)).substring(0,3));
+                    tvDayTwoDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(1).getEpochDate()  * 1000L)).substring(0,3));
+                    tvDayThreeDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(2).getEpochDate()  * 1000L)).substring(0,3));
+                    tvDayFourDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(3).getEpochDate()  * 1000L)).substring(0,3));
+                    tvDayFiveDate.setText(String.valueOf(new Date(response.body().getDailyForecasts().get(4).getEpochDate()  * 1000L)).substring(0,3));
+
+                    String dayOneIconNum = String.valueOf(response.body().getDailyForecasts().get(0).getDay().getIcon());
+                    setDayOneIcon(dayOneIconNum);
+
+                    String dayTwoIconNum = String.valueOf(response.body().getDailyForecasts().get(1).getDay().getIcon());
+                    setDayTwoIcon(dayTwoIconNum);
+
+                    String dayThreeIconNum = String.valueOf(response.body().getDailyForecasts().get(2).getDay().getIcon());
+                    setDayThreeIcon(dayThreeIconNum);
+
+                    String dayFourIconNum = String.valueOf(response.body().getDailyForecasts().get(3).getDay().getIcon());
+                    setDayFourIcon(dayFourIconNum);
+
+                    String dayFiveIconNum = String.valueOf(response.body().getDailyForecasts().get(4).getDay().getIcon());
+                    setDayFiveIcon(dayFiveIconNum);
+
+
+
+                    int tempDayOne = (int) Math.rint(response.body().getDailyForecasts().get(0).getTemperature().getMaximum().getValue());
+                    int tempDayTwo = (int) Math.rint(response.body().getDailyForecasts().get(1).getTemperature().getMaximum().getValue());
+                    int tempDayThree = (int) Math.rint(response.body().getDailyForecasts().get(2).getTemperature().getMaximum().getValue());
+                    int tempDayFour = (int) Math.rint(response.body().getDailyForecasts().get(3).getTemperature().getMaximum().getValue());
+                    int tempDayFive = (int) Math.rint(response.body().getDailyForecasts().get(4).getTemperature().getMaximum().getValue());
+
+                    tvDayOneTemp.setText(String.valueOf(tempDayOne));
+                    tvDayTwoTemp.setText(String.valueOf(tempDayTwo));
+                    tvDayThreeTemp.setText(String.valueOf(tempDayThree));
+                    tvDayFourTemp.setText(String.valueOf(tempDayFour));
+                    tvDayFiveTemp.setText(String.valueOf(tempDayFive));
 
 
 
@@ -346,5 +358,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (iconNum.equals("32")){
             ivDayFiveIcon.setImageResource(R.drawable.wind);
         }
+    }
+
+    private void loadRecyclerView(List<ListItem> forecastResponse) {
+        HourlyAdapter hourlyAdapter = new HourlyAdapter(forecastResponse);
+        recyclerView.setAdapter(hourlyAdapter);
     }
 }
